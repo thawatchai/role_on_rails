@@ -13,12 +13,12 @@ module RoleOnRails
       def add_role(symbol, context = nil)
         RoleAssignment.clear_cache(self, symbol, context)
         role_id = self.class.role_klass.ids_for(symbol).first
-        RoleAssignment.find_or_create_by_role_id_and_user_id_and_context_type_and_context_id(
+        RoleAssignment.where(
           :role_id      => role_id,
           :user_id      => self.id,
           :context_type => context && context.class.to_s,
           :context_id   => context && context.id
-        ) unless role_id.nil?
+        ).first_or_create unless role_id.nil?
       end
 
       def remove_role(symbol, context = nil)
