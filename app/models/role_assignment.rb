@@ -1,6 +1,6 @@
 class RoleAssignment < ActiveRecord::Base
-  attr_accessible :user_id, :role_id, :disabled, :context_id, :context_type,
-                  :user, :context
+  #attr_accessible :user_id, :role_id, :disabled, :context_id, :context_type,
+  #                :user, :context
 
   belongs_to :user
   belongs_to :context, :polymorphic => true
