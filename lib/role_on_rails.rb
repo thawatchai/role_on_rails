@@ -5,6 +5,6 @@ ActiveRecord::Base.class_eval { include RoleOnRails }
 
 module RoleOnRails
   class Engine < Rails::Engine
-  end if defined?(Rails) && Rails::VERSION::MAJOR == 3
+  end if defined?(Rails) && Rails::VERSION::MAJOR >= 3
 end
 

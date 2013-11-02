@@ -1,4 +1,4 @@
-module ActionLogger
-  VERSION = "0.0.1"
+module RoleOnRails
+  VERSION = "0.0.2"
 end
 
