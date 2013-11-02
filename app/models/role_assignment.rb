@@ -19,11 +19,14 @@ class RoleAssignment < ActiveRecord::Base
 
       if value.nil?
         role_ids = user.role_klass.ids_for(s)
-        value = !! (role_ids.present? && (
-                      context.nil? ?
-                        user.role_assignments.find_all_by_role_id_and_context_type_and_context_id(role_ids, nil, nil) :
-                        user.role_assignments.find_all_by_role_id_and_context_type_and_context_id(role_ids, context.class.to_s, context.id)
-                   ).present?)
+        conditions = { :role_id => role_ids }
+        conditions.merge!(
+          context.nil? ?
+            { :context_type => nil, :context_id => nil } :
+            { :context_type => context.class.to_s, :context_id => context.id }
+        )
+        value = !! (role_ids.present? && 
+                    user.role_assignments.where(conditions).exists?)
         Rails.cache.write(key, value)
       end
       value
