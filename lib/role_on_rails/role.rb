@@ -20,7 +20,7 @@ module RoleOnRails
 
       def define_role(symbol, id = nil, name = nil, assignable = true)
         @@roles ||= []
-        @@roles << [id || @@roles.size + 1, symbol, name || I18n.t("roles.names.#{symbol}"), assignable]
+        @@roles << [id || @@roles.size + 1, symbol, name || Proc.new(I18n.t("roles.names.#{symbol}")), assignable]
       end
 
       def list
@@ -28,7 +28,7 @@ module RoleOnRails
       end
 
       def assignable_list
-        @@roles.select { |r| r[3] }.map { |r| self.new(r[0]) }
+        @@roles.select { |r| r[3].is_a?(Proc) ? r[3].call : r[3] }.map { |r| self.new(r[0]) }
       end
     end
 
