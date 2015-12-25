@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "role_on_rails"
-  s.version     = "0.0.3"
+  s.version     = "0.0.4"
   s.platform    = Gem::Platform::RUBY  
   s.summary     = "Basic role functionalities."
   s.email       = "zonecheung@gmail.com"

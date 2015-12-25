@@ -20,7 +20,7 @@ module RoleOnRails
 
       def define_role(symbol, id = nil, name = nil, assignable = true)
         @@roles ||= []
-        @@roles << [id || @@roles.size + 1, symbol, name || Proc.new(I18n.t("roles.names.#{symbol}")), assignable]
+        @@roles << [id || @@roles.size + 1, symbol, name || Proc.new(I18n.t("roles.names.#{symbol}")), assignable] unless @roles.detect { |r| r[1] == symbol }
       end
 
       def list
