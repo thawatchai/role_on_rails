@@ -1,13 +1,15 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 
+require "role_on_rails/version"
+
 Gem::Specification.new do |s|
   s.name        = "role_on_rails"
-  s.version     = "0.0.4"
+  s.version     = RoleOnRails::VERSION
   s.platform    = Gem::Platform::RUBY  
   s.summary     = "Basic role functionalities."
   s.email       = "zonecheung@gmail.com"
-  s.homepage    = "http://github.com/zonecheung/role_on_rails"
+  s.homepage    = "http://github.com/thawatchai/role_on_rails"
   s.description = "Basic role functionalities."
   s.authors     = ['John Tjanaka']
 
@@ -18,5 +20,5 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency("rails", ">= 3.0")
+  s.add_dependency("rails", "~> 4.2")
 end

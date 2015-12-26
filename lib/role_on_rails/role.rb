@@ -1,6 +1,6 @@
 module RoleOnRails
   module Role
-    attr_reader :id, :name, :symbol, :assignable
+    attr_reader :id, :name, :symbol, :assignable, :context_type
 
     def self.included(base)
       base.extend ClassMethods
@@ -18,9 +18,9 @@ module RoleOnRails
         end
       end
 
-      def define_role(symbol, id = nil, name = nil, assignable = true)
+      def define_role(symbol, id = nil, name = nil, assignable = true, context_type = nil)
         @@roles ||= []
-        @@roles << [id || @@roles.size + 1, symbol, name || Proc.new(I18n.t("roles.names.#{symbol}")), assignable] unless @@roles.detect { |r| r[1] == symbol }
+        @@roles << [id || @@roles.size + 1, symbol, name || Proc.new(I18n.t("roles.names.#{symbol}")), assignable, context_type] unless @@roles.detect { |r| r[1] == symbol }
       end
 
       def list
@@ -34,7 +34,7 @@ module RoleOnRails
 
     def initialize(id)
       row = self.class.roles.assoc(id.to_i)
-      @id, @symbol, @name, @assignable = row if row
+      @id, @symbol, @name, @assignable, @context_type = row if row
     end
   end
 end
