@@ -11,7 +11,7 @@ module RoleOnRails
       end
 
       def add_role(symbol, context = nil)
-        RoleAssignment.clear_cache(self, symbol, context)
+        # RoleAssignment.clear_cache(self, symbol, context)
         role_id = self.class.role_klass.ids_for(symbol).first
         RoleAssignment.where(
           :role_id      => role_id,
@@ -22,7 +22,7 @@ module RoleOnRails
       end
 
       def remove_role(symbol, context = nil)
-        RoleAssignment.clear_cache(self, symbol, context)
+        # RoleAssignment.clear_cache(self, symbol, context)
         role_id = self.class.role_klass.ids_for(symbol).first
         unless role_id.nil?
           role_assignment = context.nil? ?

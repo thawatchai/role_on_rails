@@ -13,11 +13,11 @@ class RoleAssignment < ActiveRecord::Base
     symbols = [symbols] unless symbols.is_a?(Array)
 
     symbols.any? do |s|
-      key = context.blank? ? "#{s}:#{user.id}" :
-              "#{s}:#{user.id}:#{context.class.to_s.parameterize}:#{context.id}"
-      value = Rails.cache.read(key)
+      # key = context.blank? ? "#{s}:#{user.id}" :
+      #         "#{s}:#{user.id}:#{context.class.to_s.parameterize}:#{context.id}"
+      # value = Rails.cache.read(key)
 
-      if value.nil?
+      # if value.nil?
         role_ids = user.role_klass.ids_for(s)
         conditions = { :role_id => role_ids }
         conditions.merge!(
@@ -27,9 +27,9 @@ class RoleAssignment < ActiveRecord::Base
         )
         value = !! (role_ids.present? && 
                     user.role_assignments.where(conditions).exists?)
-        Rails.cache.write(key, value)
-      end
-      value
+        # Rails.cache.write(key, value)
+      # end
+      # value
     end
   end
 
